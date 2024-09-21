@@ -1,0 +1,23 @@
+{
+  "name": "it-academyfinalwork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.0.8",
+    "@wdio/cli": "^9.0.9",
+    "@wdio/local-runner": "^9.0.9",
+    "@wdio/mocha-framework": "^9.0.8",
+    "wdio-wait-for": "^3.0.11"
+  },
+  "dependencies": {
+    "chai": "^5.1.1"
+  }
+}
