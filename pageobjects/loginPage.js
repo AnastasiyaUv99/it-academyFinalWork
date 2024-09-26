@@ -4,6 +4,7 @@ class LoginPage extends Base {
   constructor() {
     super();
   }
+  
   get loginField() {
     return $('.form-control');
   }
@@ -16,41 +17,19 @@ class LoginPage extends Base {
     return $('div.alert.alert-error.fs-5.mb-2');
   }
 
-  get smsCodeFieldOne() {
-    return $('.otp-fieldset__input.form-control:first-of-type');
+  get smsCodeField() {
+    return $$('.otp-fieldset__input.form-control');
   }
 
-  get smsCodeFieldTwo() {
-    return $('.otp-fieldset__input.form-control:nth-of-type(2)');
-  }
-
-  get smsCodeFieldThr() {
-    return $('.otp-fieldset__input.form-control:nth-of-type(3)');
-  }
-
-  get smsCodeFieldFour() {
-    return $('.otp-fieldset__input.form-control:nth-of-type(4)');
-  }
-
-  get authorizationHelpPage() {
+  get loginHelpPageButton() {
     return $('.link.link-muted[href="/help/assistant.phtml?l=i.auth.problem"]');
   }
 
-  get authorizationHelpPageUrl() {
-    return 'https://oz.by/help/assistant.phtml?l=i.auth.problem'
-  }
-
-
-  async loginWithPhoneNumber(telephoneNumber) {
-    await this.loginField.setValue(telephoneNumber);
-    await this.pressElement(this.enterButton);
-  }
-
-  async loginWithSmsCode(numOne, numTwo, numThr, numFour) {
-    await this.smsCodeFieldOne.setValue(numOne);
-    await this.smsCodeFieldTwo.setValue(numTwo);
-    await this.smsCodeFieldThr.setValue(numThr);
-    await this.smsCodeFieldFour.setValue(numFour);
+  async loginWithSmsCode(arr) {
+    await this.smsCodeField[0].setValue(arr[0]);
+    await this.smsCodeField[1].setValue(arr[1]);
+    await this.smsCodeField[2].setValue(arr[2]);
+    await this.smsCodeField[3].setValue(arr[3]);
     await this.pressElement(this.enterButton);
   }
 }

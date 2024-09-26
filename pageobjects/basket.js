@@ -5,23 +5,7 @@ class Basket extends Base {
     super();
   }
 
-  get basketUrl() {
-    return 'https://oz.by/checkout/#';
-  }
-
-  get basketButton() {
-    return $('.link.user-bar__item.user-bar__cart');
-  }
-
-  get addToBasketButtonArr() {
-    return $$('.product-card__button');
-  }
-
-  get arrayOfItemsNamesInCatalog() {
-    return $$('.link.product-card__link');
-  }
-
-  get arrayOfItemsNamesInBasket() {
+  get arrayOfItemsNames() {
     return $$('.goods-table-cell__link');
   }
 
@@ -53,33 +37,26 @@ class Basket extends Base {
     return $('.i-amount-select__key');
   }
 
-  get amountOfItems() {
-    return $('.i-amount-select__key');
-  }
-
   get quantitySelectors() {
-    return $('.i-amount-select__item:nth-of-type(5)');
+    return $$('.i-amount-select__item');
   }
 
 
   async deletionFromBasket() {
     await this.pressElement(await this.selectItemsInBasketButton[await this.selectItemsInBasketButton.length - 1])
+    await browser.waitUntil(async () => { return (await browser.execute(() => document.readyState)) === 'complete';}, {
+      timeout: 10000, 
+      timeoutMsg: ''
+    });
     await this.pressElement(await this.deleteButton)
     await this.pressElement(await this.confirmDeletingButton)
   }
 
   async changingAmountOfItems(quantity) {
     await this.pressElement(await this.amountOfItems)
-    await this.pressElement(await this.quantitySelectors)
+    await this.pressElement(await this.quantitySelectors[quantity - 1])
+    await browser.pause(1000) 
   }
-
-  async getTotalPrice(locator) {
-    const totalPriceText = await locator.getText()
-    return parseFloat(totalPriceText.replace(' р.', '').replace(',', '.'))
-  }
-
-
-
 
   
 }

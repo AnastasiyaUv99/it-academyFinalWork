@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "zoomRange": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "copyrights": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LayerMetaData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scaled": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "scaled"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "zoomRange",
+        "copyrights",
+        "LayerMetaData"
+      ]
+    }
+  }

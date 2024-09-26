@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "settings": {
+      "type": "object",
+      "properties": {
+        "auto_goals": {
+          "type": "number"
+        },
+        "button_goals": {
+          "type": "number"
+        },
+        "c_recp": {
+          "type": "string"
+        },
+        "form_goals": {
+          "type": "number"
+        },
+        "pcs": {
+          "type": "string"
+        },
+        "webvisor": {
+          "type": "object",
+          "properties": {
+            "arch_type": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "forms": {
+              "type": "number"
+            },
+            "recp": {
+              "type": "string"
+            },
+            "urls": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "arch_type",
+            "date",
+            "forms",
+            "recp",
+            "urls"
+          ]
+        },
+        "sbp": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "string"
+            },
+            "b": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "eu": {
+          "type": "number"
+        },
+        "hittoken": {
+          "type": "string"
+        },
+        "wstoken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "auto_goals",
+        "button_goals",
+        "c_recp",
+        "form_goals",
+        "pcs",
+        "webvisor",
+        "sbp",
+        "eu",
+        "hittoken",
+        "wstoken"
+      ]
+    },
+    "userData": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  "required": [
+    "settings",
+    "userData"
+  ]
+}

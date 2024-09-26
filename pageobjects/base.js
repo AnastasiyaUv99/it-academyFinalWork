@@ -17,7 +17,7 @@ class Base {
       await WebElement.click();
     }
     
-    async waitingForNewPageLoad() {
+    async openingNewPage() {
       await browser.waitUntil(async () => { 
         const windowHandles = await browser.getWindowHandles();
         return windowHandles.length > 1; 
@@ -25,6 +25,8 @@ class Base {
           timeout: 5000,
           timeoutMsg: 'New Page is not load'
       });
+      const handles = await browser.getWindowHandles()
+      await browser.switchToWindow(handles[1])
     }
 
 
