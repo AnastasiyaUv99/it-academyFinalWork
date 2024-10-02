@@ -1,11 +1,13 @@
 import { expect } from 'chai';
 
+const Header = require('../pageobjects/components/header');
 const Catalog = require('../pageobjects/catalog');
 const MainPage = require('../pageobjects/mainPage');
 const ProductPage = require('../pageobjects/productPage');
 const { getPrices, getNumbersFromText } = require('../helpers/stringFunctions');
 const { urls } = require('../helpers/urls');
 
+const header = new Header();
 const catalog = new Catalog();
 const mainPage = new MainPage();
 const productPage = new ProductPage();
@@ -33,4 +35,10 @@ describe('working with items', () => {
     await catalog.pressElement(await catalog.viewChangeButton);
     expect(await catalog.listOfProducts.isDisplayed()).to.be.true;
   });
+
+  it('should open basket page after clicking Add-to-cart-button twice', async () => {
+    await catalog.openBasketByTwiceClicking(2, header.quantityOfProductsInBasket);
+    expect(await browser.getUrl()).to.equal(urls.basket);
+  });
+
 });

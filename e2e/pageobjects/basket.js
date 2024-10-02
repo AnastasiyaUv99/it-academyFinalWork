@@ -1,5 +1,5 @@
-const  Base  = require('./base');
-const { getTextArray } = require('../helpers/stringFunctions')
+const Base = require('./base');
+const { getTextArray } = require('../helpers/stringFunctions');
 
 class Basket extends Base {
   constructor() {
@@ -42,31 +42,25 @@ class Basket extends Base {
     return $$('.i-amount-select__item');
   }
 
-
-  async checkThatProductIsInBasket(productNamesInCatalog){
-    const productNamesInBasket = await getTextArray(await this.productsName)
-    const allProductsInBasket = productNamesInCatalog.every(catalogProduct => 
-      productNamesInBasket.some(basketProduct => basketProduct.includes(catalogProduct)));
-  return allProductsInBasket;
+  async checkThatProductsIsInBasket(productNamesInCatalog) {
+    const productNamesInBasket = await getTextArray(await this.productsName);
+    const allProductsIsInBasket = productNamesInCatalog.every(catalogProduct => productNamesInBasket.some(basketProduct => basketProduct.includes(catalogProduct)));
+    return allProductsIsInBasket;
   }
 
   async removeProductsFromBasket() {
-    await this.pressElement(await this.selectProductsInBasketButtons[await this.selectProductsInBasketButtons.length - 1])
+    await this.pressElement(await this.selectProductsInBasketButtons[await this.selectProductsInBasketButtons.length - 1]);
     await this.waiters.waitForPageLoad()
-    await this.pressElement(await this.removeButton)
-    await this.pressElement(await this.confirmRemoveButton)
+    await this.pressElement(await this.removeButton);
+    await this.pressElement(await this.confirmRemoveButton);
   }
 
   async changeAmountOfProducts(quantity) {
-    const oldValue = await this.totalPriceOfProducts.getText()
-    await this.pressElement(await this.сurrentProductQuantity)
-    await this.pressElement(await this.productQuantities[quantity - 1])
-    await this.waiters.waitForElementValueChange(this.totalPriceOfProducts, oldValue)
+    const oldValue = await this.totalPriceOfProducts.getText();
+    await this.pressElement(await this.сurrentProductQuantity);
+    await this.pressElement(await this.productQuantities[quantity - 1]);
+    await this.waiters.waitForElementValueChange(this.totalPriceOfProducts, oldValue);
   }
-
-
-
-  
 }
 
 module.exports = Basket;

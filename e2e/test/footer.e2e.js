@@ -13,11 +13,6 @@ describe('footer test functionality', () => {
     await footer.navigate(urls.mainPage);
   });
 
-  it('should open download app page in new window when Google Play button is clicked', async () => {
-    await footer.openAndSwitchToNewPage(await footer.googlePlayButton, urls.ozInGooglePlay);
-    expect(await browser.getUrl()).to.equal(urls.ozInGooglePlay);
-  });
-
   it('should display greeting answer after sending a message in support chat', async () => {
     await footer.sendMessageToSupportChat(supportChat.message);
     expect(await footer.supportAnswer[0].getText()).to.equal(supportChat.greeting);
@@ -27,5 +22,10 @@ describe('footer test functionality', () => {
     await footer.pressElement(await footer.ozNewsButton);
     const newsText = await newsPage.chooseNewsToOpen(5);
     expect(newsText).to.equal(await newsPage.ozNewsTitle.getText());
+  });
+
+  it('should open download app page in new window when Google Play button is clicked', async () => {
+    await footer.openAndSwitchToNewPage(await footer.googlePlayButton, urls.ozInGooglePlay);
+    expect(await browser.getUrl()).to.equal(urls.ozInGooglePlay);
   });
 });

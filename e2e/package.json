@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --debug test/*.e2e.js --fix",
-    "wdio": "wdio run ./wdio.conf.js"
+    "lintTest": "eslint --debug test/*.e2e.js --fix",
+    "lintPO": "eslint --debug pageobjects/**/*.js --fix",
+    "lintHelpers": "eslint --debug helpers/*.js --fix",
+    "wdio": "wdio run ./wdio.conf.js",
+    "allure": "npx allure generate allure-results --clean -o allure-report",
+    "report": "npx allure open allure-report"
   },
   "keywords": [],
   "author": "",

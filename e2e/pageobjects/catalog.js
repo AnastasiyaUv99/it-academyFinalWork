@@ -1,19 +1,19 @@
-const  Base  = require('./base');
+const Base = require('./base');
 
 class Catalog extends Base {
   constructor() {
     super();
   }
 
-  get discountTags(){
+  get discountTags() {
     return $$('.badge-discount-primary');
   }
 
-  get pricesWithDiscount(){
+  get pricesWithDiscount() {
     return $$('.product-card__cost>.text-primary');
   }
 
-  get previousPrices(){
+  get previousPrices() {
     return $$('.d-inline-block');
   }
 
@@ -21,7 +21,7 @@ class Catalog extends Base {
     return $$('.product-card__cost b');
   }
 
-  get products(){
+  get products() {
     return $$('.link.product-card__link');
   }
 
@@ -40,42 +40,41 @@ class Catalog extends Base {
   get unsuccessSearchText() {
     return $('body .digi-title-alternative__wrapper');
   }
-  
-  get navigationChain(){
-    return $$('.breadcrumbs__list__item');
-}
 
-  get listOfProducts(){
+  get navigationChain() {
+    return $$('.breadcrumbs__list__item');
+  }
+
+  get listOfProducts() {
     return $('.products_list');
   }
 
-  get viewChangeButton(){
+  get viewChangeButton() {
     return $('[data-value="list"]');
   }
 
-  async addProductsInBasket(productQuantity, webElement){
-    let productNamesInCatalog =[]
-    for(let i = 0; i<productQuantity; i++){
+  async addProductsInBasket(productQuantity, webElement) {
+    const productNamesInCatalog = [];
+    for (let i = 0; i < productQuantity; i++) {
       await this.pressElement(await this.addToBasketButtons[i]);
       const productName = await this.productsName[i].getText();
       productNamesInCatalog.push(productName);
     }
-    await this.pressElement(await webElement)
-    return productNamesInCatalog
+    await this.pressElement(await webElement);
+    return productNamesInCatalog;
   }
 
-  async openBasketByTwiceClicking(productNumber, webElement){
-    await this.pressElement(await this.addToBasketButtons[productNumber])
-    await this.waiters.waitForElementToBeVisible(await webElement) 
-    await this.pressElement(await this.addToBasketButtons[productNumber])
+  async openBasketByTwiceClicking(productNumber, webElement) {
+    await this.pressElement(await this.addToBasketButtons[productNumber]);
+    await this.waiters.waitForElementToBeVisible(await webElement);
+    await this.pressElement(await this.addToBasketButtons[productNumber]);
   }
 
-  async openProductPage(productNumber){
-    const itemNameInCatalog = await this.productsName[productNumber].getText()
-    await this.pressElement(await this.products[productNumber])
-    return itemNameInCatalog
+  async openProductPage(productNumber) {
+    const itemNameInCatalog = await this.productsName[productNumber].getText();
+    await this.pressElement(await this.products[productNumber]);
+    return itemNameInCatalog;
   }
-
 }
 
 module.exports = Catalog;

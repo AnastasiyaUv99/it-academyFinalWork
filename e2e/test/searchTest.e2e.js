@@ -5,7 +5,7 @@ const Header = require('../pageobjects/components/header');
 const Filter = require('../pageobjects/components/filter');
 const Catalog = require('../pageobjects/catalog');
 const { urls } = require('../helpers/urls');
-const { search } = require('../helpers/constants');
+const { search, priceFilter } = require('../helpers/constants');
 const { getTextArray, getPrices } = require('../helpers/stringFunctions');
 
 const mainPage = new MainPage();
@@ -19,7 +19,7 @@ describe('Oz search testing', () => {
   });
 
   it('should display catalog of products if search is successful', async () => {
-    await header.search(search.notebook, catalog.successSearchTitle);
+    await header.search(search.validText, catalog.successSearchTitle);
     expect(await catalog.successSearchTitle.isDisplayed()).to.be.true;
   });
 
@@ -29,17 +29,17 @@ describe('Oz search testing', () => {
   });
 
   it('should perform search that filters products by price range', async () => {
-    await header.search(search.notebook, catalog.successSearchTitle);
-    await filter.setPriceRange(5, 20);
+    await header.search(search.validText, catalog.successSearchTitle);
+    await filter.setPriceRange(priceFilter.minPrice, priceFilter.maxPrice);
     const pricesInCatalog = await getPrices(await getTextArray(await catalog.prices));
     const sortedPricesInCatalog = pricesInCatalog.sort((a, b) => a - b);
-    expect(sortedPricesInCatalog[0]).to.be.greaterThan(5);
-    expect(sortedPricesInCatalog[sortedPricesInCatalog.length - 1]).to.be.lessThan(20);
+    expect(sortedPricesInCatalog[0]).to.be.greaterThan(priceFilter.minPrice);
+    expect(sortedPricesInCatalog[sortedPricesInCatalog.length - 1]).to.be.lessThan(priceFilter.maxPrice);
   });
 
   it('should reset catalog to original view after removing price filter', async () => {
-    await header.search(search.notebook, catalog.successSearchTitle);
-    await filter.setPriceRange(5, 20);
+    await header.search(search.validText, catalog.successSearchTitle);
+    await filter.setPriceRange(priceFilter.minPrice, priceFilter.maxPrice);
     await header.pressElement(await filter.clearFilter);
     expect(await catalog.successSearchTitle.isDisplayed()).to.be.true;
   });
@@ -50,7 +50,7 @@ describe('Oz search testing', () => {
   });
 
   it('should navigate to specific category in catalog page when banner button on the main page is clicked', async () => {
-    const bannerText = await mainPage.goToCategorieFromBanner(7);
+    const bannerText = await mainPage.goToCategorieFromBanner(9);
     const navigationChainText = await getTextArray(await catalog.navigationChain);
     const check = navigationChainText.some(item => item.includes(bannerText));
     expect(check).to.be.true;

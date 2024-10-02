@@ -1,10 +1,10 @@
-const  Base  = require('./base');
+const Base = require('./base');
 
 class LoginPage extends Base {
   constructor() {
     super();
   }
-  
+
   get loginField() {
     return $('.form-control');
   }
@@ -28,13 +28,11 @@ class LoginPage extends Base {
   async login(telephoneNumber, smsCode) {
     await this.loginField.setValue(telephoneNumber);
     await this.pressElement(this.enterButton);
-    for(let i = 0; i< await this.smsCodeFields.length; i++){
+    for (let i = 0; i < await this.smsCodeFields.length; i++) {
       await this.smsCodeFields[i].setValue(smsCode[0]);
     }
     await this.pressElement(this.enterButton);
   }
-
-
 }
 
 module.exports = LoginPage;

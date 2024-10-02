@@ -1,37 +1,36 @@
-const  Base  = require('./base');
+const Base = require('./base');
 
 class MainPage extends Base {
   constructor() {
     super();
   }
 
-  get bestsellersButton(){
+  get bestsellersButton() {
     return $('[href="/books/bestsellers"]');
   }
 
-  get bannerCategories(){
+  get bannerCategories() {
     return $$('.offers-slider__pagination__item');
   }
 
-  get bannerButtons(){
+  get bannerButtons() {
     return $$('.offers-slider__item__btn');
   }
 
-  get bannerTitles(){
+  get bannerTitles() {
     return $$('.offers-slider__item__main-title');
   }
 
-  get promotionsAndDiscountsButton(){
+  get promotionsAndDiscountsButton() {
     return $('[href="https://oz.by/sseries/more1502742.html"]');
-}
-
-  async goToCategorieFromBanner(categoryNumber){
-    await this.pressElement(await this.bannerCategories[categoryNumber])
-    const bannerText = await this.bannerTitles[categoryNumber].getText()
-    await this.pressElement(await this.bannerButtons[categoryNumber])
-    return bannerText
   }
 
+  async goToCategorieFromBanner(categoryNumber) {
+    await this.pressElement(await this.bannerCategories[categoryNumber]);
+    const bannerText = await this.bannerTitles[categoryNumber].getText();
+    await this.pressElement(await this.bannerButtons[categoryNumber]);
+    return bannerText;
+  }
 }
 
 module.exports = MainPage;

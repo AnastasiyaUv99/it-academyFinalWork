@@ -14,13 +14,17 @@ const catalog = new Catalog();
 
 describe('working with Oz basket', () => {
   beforeEach(async () => {
-    await basket.navigate(urls.catalog);
+    await basket.navigate(urls.catalog);  
   });
-
-  it('should add selected products to basket when add button is clicked', async () => {
+  
+  afterEach(async () => {
+    await basket.clearAppState(); 
+  });
+  
+  it('should add selected products to basket when add-button is clicked', async () => {
     const productNamesInCatalog = await catalog.addProductsInBasket(2, header.basketButton);
-    const check = await basket.checkThatProductIsInBasket(productNamesInCatalog);
-    expect(check).to.be.true;
+    const allProductsIsInBasket = await basket.checkThatProductsIsInBasket(productNamesInCatalog);
+    expect(allProductsIsInBasket).to.be.true;
   });
 
   it('should remove all products from basket', async () => {
@@ -44,8 +48,5 @@ describe('working with Oz basket', () => {
     expect(await getPrices(await basket.totalPriceOfProducts.getText())).to.equal(totalPrice * 5);
   });
 
-  it('should open basket page after clicking Add-to-cart-button twice', async () => {
-    await catalog.openBasketByTwiceClicking(2, header.quantityOfProductsInBasket);
-    expect(await browser.getUrl()).to.equal(urls.basket);
-  });
+
 });

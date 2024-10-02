@@ -1,4 +1,4 @@
-const Base  = require('../base');
+const Base = require('../base');
 
 class Header extends Base {
   constructor() {
@@ -25,12 +25,11 @@ class Header extends Base {
     return $('[id="cart-count"]');
   }
 
-  async search(text, webElement){
-    await this.searchField.setValue(text)
-    await this.searchButton.click()
-    await this.waiters.waitForElementToBeVisible(webElement)
+  async search(text, webElement) {
+    await this.searchField.setValue(text);
+    await this.searchButton.click();
+    await this.waiters.waitForElementToBeVisible(webElement);
   }
-  
 }
 
 module.exports = Header;
